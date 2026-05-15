@@ -388,12 +388,9 @@ void mainMenu() {
         case 4: { // 创建群组
             string gname, gdesc;
             cout << "Group name: ";
-            getline(cin, gname);  // cin 后需要先清除缓冲区，可通过cin.ignore()
-            // 上面已经有 cin.ignore() 在 switch 之前？需要调整：对于 case 4，需要先读掉前一个输入的换行
-            // 简便起见，在 case 4 内部处理
-            // 重新输入：因为之前 cin >> choice 后调用了 cin.ignore()，所以直接getline没问题
-            // 但 case 4 里的 getline 会再次读取空行？之前的 cin.ignore() 已经忽略了换行，所以这里直接 getline 即可
-            // 然而，若有其他输入残留，可能需额外处理，此处假定正确。
+            cin>>gname;
+            cin.ignore(); // 清除残留换行符
+            
             cout << "Group description: ";
             getline(cin, gdesc);
             js["msgid"] = CREATE_GROUP_MSG;
